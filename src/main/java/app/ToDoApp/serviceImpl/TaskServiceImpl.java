@@ -46,5 +46,11 @@ public class TaskServiceImpl implements TaskService{
 		// TODO Auto-generated method stub
 		return dao.searchByString(inputString);
 	}
+
+	@Override
+	public ToDoDTO getUserById(int id) {
+		// TODO Auto-generated method stub
+		return dao.getUserById(id);
+	}
 	
 }

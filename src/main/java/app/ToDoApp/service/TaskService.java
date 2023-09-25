@@ -11,4 +11,5 @@ public interface TaskService {
 	public ToDoDTO update(ToDoDTO toDoDTO);
 	public Boolean delete(int id);
 	public List<ToDoDTO> searchByString( String inputString );
+	public ToDoDTO getUserById(int id);
 }

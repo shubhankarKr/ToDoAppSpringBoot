@@ -50,4 +50,9 @@ public class TaskController {
 	public List<ToDoDTO> searchByString(@PathVariable String inputString ){
 		return service.searchByString(inputString);
 	}
+	
+	@GetMapping("/{id}")
+	public ToDoDTO getUserById(@PathVariable int id) {
+		return service.getUserById(id);
+	}
 }

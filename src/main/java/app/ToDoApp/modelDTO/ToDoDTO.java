@@ -8,7 +8,7 @@ public class ToDoDTO {
 	private int id;
 	private Date createdDate;
 	private Date lastUpdatedDate;
-	private String desciption;
+	private String description;
 	private String title;
 	private String colourCode;
 
@@ -37,11 +37,11 @@ public class ToDoDTO {
 	}
 
 	public String getDesciption() {
-		return desciption;
+		return description;
 	}
 
 	public void setDesciption(String desciption) {
-		this.desciption = desciption;
+		this.description = desciption;
 	}
 
 	public String getTitle() {

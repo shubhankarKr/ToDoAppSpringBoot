@@ -26,15 +26,13 @@ public class TaskDAOImpl implements TaskDAO{
 		toDo.setCreatedDate(date);
 		toDo.setLastUpdatedDate(date);
 		entityManager.persist(toDo);
-		
-		
 		ToDoDTO dto=toDo.createDTO(toDo);
 		return dto;
 	}
 
 	@Override
 	public List<ToDoDTO> getTasks() {
-		Query q=entityManager.createQuery("select t from ToDo t");
+		Query q=entityManager.createQuery("select t from ToDo t order by t.id desc");
 		List<ToDo> toDoList=q.getResultList();
 		List<ToDoDTO> list=new ArrayList<>();
 		for (ToDo toDo : toDoList) {
@@ -79,4 +77,15 @@ public class TaskDAOImpl implements TaskDAO{
 		return res;
 	}
 
+	@Override
+	public ToDoDTO getUserById(int id) {
+		// TODO Auto-generated method stub
+		ToDo entity=entityManager.find(ToDo.class, id);
+		if(entity != null) {
+			return entity.createDTO(entity);
+		}
+		else {
+			return null;
+		}
+	}
 }
