@@ -11,6 +11,7 @@ public class ToDoDTO {
 	private String description;
 	private String title;
 	private String colourCode;
+	private ColorCodeDTO colour;
 
 	public int getId() {
 		return id;
@@ -59,10 +60,17 @@ public class ToDoDTO {
 	public void setColourCode(String colourCode) {
 		this.colourCode = colourCode;
 	}
+	
+	public ColorCodeDTO getColour() {
+		return colour;
+	}
+
+	public void setColour(ColorCodeDTO colour) {
+		this.colour = colour;
+	}
 
 	public ToDo createEntity(ToDoDTO toDoDTO) {
 		ToDo toDo=new ToDo();
-		toDo.setColourCode(toDoDTO.getColourCode());
 //		toDo.setCreatedDate(toDoDTO.getCreatedDate());
 		toDo.setDesciption(toDoDTO.getDesciption());
 //		toDo.setLastUpdatedDate(toDoDTO.getLastUpdatedDate());

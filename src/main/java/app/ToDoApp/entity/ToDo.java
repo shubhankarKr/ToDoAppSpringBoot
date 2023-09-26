@@ -2,12 +2,16 @@ package app.ToDoApp.entity;
 
 import java.util.Date;
 
+import app.ToDoApp.modelDTO.ColorCodeDTO;
 import app.ToDoApp.modelDTO.ToDoDTO;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -33,8 +37,9 @@ public class ToDo {
 	
 	private String title;
 	
-	@Column(name = "colour_code")
-	private String colourCode;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "color_id")
+	private ColorCode color;
 
 	public int getId() {
 		return id;
@@ -75,23 +80,29 @@ public class ToDo {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
-	public String getColourCode() {
-		return colourCode;
+	
+	public ColorCode getColor() {
+		return color;
 	}
 
-	public void setColourCode(String colourCode) {
-		this.colourCode = colourCode;
+	public void setColor(ColorCode color) {
+		this.color = color;
 	}
 
 	public ToDoDTO createDTO(ToDo toDo) {
 		ToDoDTO toDoDto=new ToDoDTO();
-		toDoDto.setColourCode(toDo.getColourCode());
 		toDoDto.setCreatedDate(toDo.getCreatedDate());
 		toDoDto.setDesciption(toDo.getDesciption());
 		toDoDto.setLastUpdatedDate(toDo.getLastUpdatedDate());
 		toDoDto.setTitle(toDo.getTitle());
 		toDoDto.setId(toDo.getId());
+		ColorCode color=toDo.getColor();
+		if(color!=null) {
+			ColorCodeDTO colorDto=new ColorCodeDTO();
+			colorDto.setColorCode(color.getColorCode());
+			colorDto.setColorId(color.getColorId());
+			toDoDto.setColour(colorDto);
+		}
 		return toDoDto;
 	}
 }

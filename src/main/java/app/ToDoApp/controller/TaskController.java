@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.ToDoApp.entity.ToDo;
+import app.ToDoApp.modelDTO.ColorCodeDTO;
+import app.ToDoApp.modelDTO.ColorUpdateModel;
 import app.ToDoApp.modelDTO.ToDoDTO;
 import app.ToDoApp.service.TaskService;
 
@@ -54,5 +56,16 @@ public class TaskController {
 	@GetMapping("/{id}")
 	public ToDoDTO getUserById(@PathVariable int id) {
 		return service.getUserById(id);
+	}
+	
+	@GetMapping("/getColorMD")
+	public List<ColorCodeDTO> getColors() {
+		return service.getColors();
+	}
+	
+	@PutMapping("/updateColor")
+	public Boolean updateColor(@RequestBody ColorUpdateModel colorUpdateModel) {
+
+		return service.updateColor(colorUpdateModel);
 	}
 }

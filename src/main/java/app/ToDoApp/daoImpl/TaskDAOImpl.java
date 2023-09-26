@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import app.ToDoApp.dao.TaskDAO;
+import app.ToDoApp.entity.ColorCode;
 import app.ToDoApp.entity.ToDo;
+import app.ToDoApp.modelDTO.ColorCodeDTO;
+import app.ToDoApp.modelDTO.ColorUpdateModel;
 import app.ToDoApp.modelDTO.ToDoDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
@@ -25,6 +28,8 @@ public class TaskDAOImpl implements TaskDAO{
 		Date date=new Date();
 		toDo.setCreatedDate(date);
 		toDo.setLastUpdatedDate(date);
+		ColorCode color= entityManager.find(ColorCode.class, 1);
+		toDo.setColor(color);
 		entityManager.persist(toDo);
 		ToDoDTO dto=toDo.createDTO(toDo);
 		return dto;
@@ -46,7 +51,6 @@ public class TaskDAOImpl implements TaskDAO{
 	@Override
 	public ToDoDTO update(ToDoDTO toDoDTO) {
 		ToDo do1=entityManager.find(ToDo.class, toDoDTO.getId());
-		do1.setColourCode(toDoDTO.getColourCode());
 		do1.setDesciption(toDoDTO.getDesciption());
 		do1.setLastUpdatedDate(new Date());
 		do1.setTitle(toDoDTO.getTitle());
@@ -57,7 +61,10 @@ public class TaskDAOImpl implements TaskDAO{
 	public Boolean delete(int id) {
 		// TODO Auto-generated method stub
 		ToDo do1=entityManager.find(ToDo.class, id);
-		entityManager.remove(do1);
+		if(do1 != null) {
+			do1.setColor(null);
+			entityManager.remove(do1);
+		}
 		return true;
 	}
 
@@ -87,5 +94,31 @@ public class TaskDAOImpl implements TaskDAO{
 		else {
 			return null;
 		}
+	}
+
+	@Override
+	public List<ColorCodeDTO> getColors() {
+		List<ColorCodeDTO> res=new ArrayList<>();
+		List<ColorCode> entities= entityManager.createQuery("select c from ColorCode c").getResultList();
+		entities.forEach(entity->{
+			ColorCodeDTO dto=new ColorCodeDTO();
+					dto.setColorCode(entity.getColorCode());
+					dto.setColorId(entity.getColorId());
+					res.add(dto);
+		});
+		return res;
+	}
+
+	@Override
+	public Boolean updateColor(ColorUpdateModel colorUpdateModel) {
+		ColorCode colorEntity = entityManager.find(ColorCode.class, colorUpdateModel.getColorId());
+		if (colorEntity != null) {
+			ToDo toDoEntity = entityManager.find(ToDo.class, colorUpdateModel.getTaskId());
+			if (toDoEntity != null) {
+				toDoEntity.setColor(colorEntity);
+			}
+			return true;
+		}
+		return false;
 	}
 }
