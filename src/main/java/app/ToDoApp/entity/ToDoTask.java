@@ -3,7 +3,7 @@ package app.ToDoApp.entity;
 import java.util.Date;
 
 import app.ToDoApp.modelDTO.ColorCodeDTO;
-import app.ToDoApp.modelDTO.ToDoDTO;
+import app.ToDoApp.modelDTO.ToDoTaskDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,10 +18,11 @@ import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "to_do_list")
-public class ToDo {
+public class ToDoTask {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "task_id")
 	private int id;
 
 	@Column(name = "created_Date")
@@ -40,7 +41,10 @@ public class ToDo {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "color_id")
 	private ColorCode color;
-
+	
+	@Column(name = "user_name")
+	private String userName;
+	
 	public int getId() {
 		return id;
 	}
@@ -88,11 +92,19 @@ public class ToDo {
 	public void setColor(ColorCode color) {
 		this.color = color;
 	}
+	
+	public String getUserName() {
+		return userName;
+	}
 
-	public ToDoDTO createDTO(ToDo toDo) {
-		ToDoDTO toDoDto=new ToDoDTO();
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public ToDoTaskDTO createDTO(ToDoTask toDo) {
+		ToDoTaskDTO toDoDto=new ToDoTaskDTO();
 		toDoDto.setCreatedDate(toDo.getCreatedDate());
-		toDoDto.setDesciption(toDo.getDesciption());
+		toDoDto.setDescription(toDo.getDesciption());
 		toDoDto.setLastUpdatedDate(toDo.getLastUpdatedDate());
 		toDoDto.setTitle(toDo.getTitle());
 		toDoDto.setId(toDo.getId());

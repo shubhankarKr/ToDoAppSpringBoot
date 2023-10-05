@@ -4,15 +4,15 @@ import java.util.List;
 
 import app.ToDoApp.modelDTO.ColorCodeDTO;
 import app.ToDoApp.modelDTO.ColorUpdateModel;
-import app.ToDoApp.modelDTO.ToDoDTO;
+import app.ToDoApp.modelDTO.ToDoTaskDTO;
 
 public interface TaskService {
-	public ToDoDTO addTask(ToDoDTO toDoDTO);
-	public List<ToDoDTO> getTasks();
-	public ToDoDTO update(ToDoDTO toDoDTO);
+	public ToDoTaskDTO addTask(ToDoTaskDTO toDoDTO);
+	public List<ToDoTaskDTO> getTasks();
+	public ToDoTaskDTO update(ToDoTaskDTO toDoDTO);
 	public Boolean delete(int id);
-	public List<ToDoDTO> searchByString( String inputString );
-	public ToDoDTO getUserById(int id);
+	public List<ToDoTaskDTO> searchByString( String inputString );
+	public ToDoTaskDTO getUserById(int id);
 	public List<ColorCodeDTO> getColors();
 	public Boolean updateColor(ColorUpdateModel colorUpdateModel);
 }

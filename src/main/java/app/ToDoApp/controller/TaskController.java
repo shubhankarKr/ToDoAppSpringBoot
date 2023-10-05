@@ -11,13 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import app.ToDoApp.entity.ToDo;
 import app.ToDoApp.modelDTO.ColorCodeDTO;
 import app.ToDoApp.modelDTO.ColorUpdateModel;
-import app.ToDoApp.modelDTO.ToDoDTO;
+import app.ToDoApp.modelDTO.ToDoTaskDTO;
 import app.ToDoApp.service.TaskService;
 
 @RestController
@@ -29,18 +27,18 @@ public class TaskController {
 	TaskService service; 
 	
 	@PostMapping(path = "/add")
-	public ToDoDTO addTask(@RequestBody ToDoDTO toDoDTO) {
-		return service.addTask(toDoDTO);
+	public ToDoTaskDTO addTask(@RequestBody ToDoTaskDTO ToDoTaskDTO) {
+		return service.addTask(ToDoTaskDTO);
 	}
 
 	@GetMapping("/getAllTasks")
-	public List<ToDoDTO> getTasks() {
+	public List<ToDoTaskDTO> getTasks() {
 		return service.getTasks();
 	}
 
 	@PutMapping("/update")
-	public ToDoDTO update(@RequestBody ToDoDTO toDoDTO) {
-		return service.update(toDoDTO);
+	public ToDoTaskDTO update(@RequestBody ToDoTaskDTO ToDoTaskDTO) {
+		return service.update(ToDoTaskDTO);
 	}
 	
 	@DeleteMapping("/delete/{id}")
@@ -49,12 +47,12 @@ public class TaskController {
 	}
 	
 	@GetMapping("/search/{inputString}")
-	public List<ToDoDTO> searchByString(@PathVariable String inputString ){
+	public List<ToDoTaskDTO> searchByString(@PathVariable String inputString ){
 		return service.searchByString(inputString);
 	}
 	
 	@GetMapping("/{id}")
-	public ToDoDTO getUserById(@PathVariable int id) {
+	public ToDoTaskDTO getUserById(@PathVariable int id) {
 		return service.getUserById(id);
 	}
 	

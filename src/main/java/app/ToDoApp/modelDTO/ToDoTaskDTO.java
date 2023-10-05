@@ -2,9 +2,9 @@ package app.ToDoApp.modelDTO;
 
 import java.util.Date;
 
-import app.ToDoApp.entity.ToDo;
+import app.ToDoApp.entity.ToDoTask;
 
-public class ToDoDTO {
+public class ToDoTaskDTO {
 	private int id;
 	private Date createdDate;
 	private Date lastUpdatedDate;
@@ -12,6 +12,7 @@ public class ToDoDTO {
 	private String title;
 	private String colourCode;
 	private ColorCodeDTO colour;
+	private String userName;
 
 	public int getId() {
 		return id;
@@ -35,14 +36,6 @@ public class ToDoDTO {
 
 	public void setLastUpdatedDate(Date lastUpdatedDate) {
 		this.lastUpdatedDate = lastUpdatedDate;
-	}
-
-	public String getDesciption() {
-		return description;
-	}
-
-	public void setDesciption(String desciption) {
-		this.description = desciption;
 	}
 
 	public String getTitle() {
@@ -69,13 +62,32 @@ public class ToDoDTO {
 		this.colour = colour;
 	}
 
-	public ToDo createEntity(ToDoDTO toDoDTO) {
-		ToDo toDo=new ToDo();
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public ToDoTask createEntity(ToDoTaskDTO toDoDTO) {
+		ToDoTask toDo=new ToDoTask();
 //		toDo.setCreatedDate(toDoDTO.getCreatedDate());
-		toDo.setDesciption(toDoDTO.getDesciption());
+		toDo.setDesciption(toDoDTO.getDescription());
 //		toDo.setLastUpdatedDate(toDoDTO.getLastUpdatedDate());
 		toDo.setTitle(toDoDTO.getTitle());
+		toDo.setUserName(toDoDTO.getUserName());
 		return toDo;
 	}
+	
+	
 
 }
