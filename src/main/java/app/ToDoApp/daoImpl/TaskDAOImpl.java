@@ -30,8 +30,8 @@ public class TaskDAOImpl implements TaskDAO{
 	
 	@Override
 	public ToDoTaskDTO addTask(ToDoTaskDTO ToDoTaskDTO) {
-		UserDetails currentUser=userService.getCurrentUser();
-		ToDoTaskDTO.setUserName(currentUser.getUsername());
+//		UserDetails currentUser=userService.getCurrentUser();
+//		ToDoTaskDTO.setUserName(currentUser.getUsername());
 		ToDoTask toDo=ToDoTaskDTO.createEntity(ToDoTaskDTO);
 		Date date=new Date();
 		toDo.setCreatedDate(date);
@@ -42,7 +42,7 @@ public class TaskDAOImpl implements TaskDAO{
 		return dto;
 	}
 
-	@Override
+	@Override  
 	public List<ToDoTaskDTO> getTasks() {
 		Query q=entityManager.createQuery("select t from ToDoTask t order by t.id desc");
 		List<ToDoTask> toDoList=q.getResultList();

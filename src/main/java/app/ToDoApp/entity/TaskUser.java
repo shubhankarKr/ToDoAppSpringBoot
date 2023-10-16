@@ -1,5 +1,8 @@
 package app.ToDoApp.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +22,7 @@ public class TaskUser {
 	@Column(name="user_name")
 	private String userName;	
 	
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
 	
 	private String role;

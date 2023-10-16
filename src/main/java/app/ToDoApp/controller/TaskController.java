@@ -20,7 +20,6 @@ import app.ToDoApp.service.TaskService;
 
 @RestController
 @RequestMapping("/task")
-@CrossOrigin
 public class TaskController {
 	
 	@Autowired
